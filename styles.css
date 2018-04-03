@@ -156,7 +156,7 @@ input {
   font-family:'helvetica neue';
 }
 ul #citySecond {
-  bottom: 7px;
+  /* bottom: 7px;
   right: 22%;
   padding: 0px;
   margin: 0px;
@@ -168,11 +168,11 @@ ul #citySecond {
   color: rgba(255,255,255,0.9);
   font-weight: 600;
   font-family:'helvetica neue';
-  text-align: center;
+  text-align: center; */
 }
 
 ul #citySecond li {
-  bottom: 7px;
+  /* bottom: 7px;
   right: 22%;
   padding: 0px;
   margin: 0px;
@@ -181,18 +181,17 @@ ul #citySecond li {
   background-color: black;
   border: none;
   color: black;
-  text-align: center;
+  text-align: center; */
 }
 .input-value {
-  position: absolute;
+  position: relative;
   top: 60%;
-  left: -30%;
   text-transform: capitalize;
-  max-width: 150px;
+
 }
 .input {
-  font-size: 50px;
-  font-weight: 400;
+  /* font-size: 50px;
+  font-weight: 400; */
 }
 .results-list {
   display:grid;
