@@ -21,7 +21,9 @@ html {
   font-family:'helvetica neue';
   text-align: center;
   font-size: 10px;
-  background:#0F334A ;
+  /* background: linear-gradient(to bottom right,#EB974E, #D91E18 , #96281B , #EF4836 , #C0392B, #F2784B ,#D64541); */
+  /* background: linear-gradient(to bottom right,#34495E, #5C97BF, #22313F , #2C3E50 , #336E7B , #34495E); */
+  background: radial-gradient(circle, #99CED4 10%,#9AD4E2   ,#76CAD4 , #8ABCD7);
   box-sizing: border-box;
   background-size:cover;
   min-height:100vh;
@@ -29,17 +31,33 @@ html {
   align-items: center;
   text-align: center;
 }
+
 .body-container {
-  background-repeat:repeat-x;
-  background-size: cover;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 50px;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 1fr 1fr 1fr ;
 }
+
+.london-clock  {
+  grid-row: 2/3;
+  background-color: black;
+  z-index: 10;
+  width: 30rem;
+  height: 30rem;
+}
+.tokyo-clock  {
+  grid-row: 2/3;
+}
+.sydney-clock  {
+  grid-row: 2/3;
+}
+.hl {
+  background-color: rgba(0,0,0,0.5)
+}
+
 .city {
   position: absolute;
-  bottom: 30px;
+  bottom: 35px;
   left: 31%;
   text-shadow: 1px 1px rgba(255,255,255,0.2);
   font-size: 30px;
@@ -47,6 +65,11 @@ html {
   color: rgba(255,255,255,0.9);
   z-index: auto;
 }
+
+.city .InputCity {
+  bottom: 15px;
+}
+
 .World-names {
   max-width: 200px;
   width: 200px;
@@ -69,44 +92,12 @@ html {
   padding-left: 4px;
   text-transform: capitalize;
 }
-.world-map {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  grid-row: 2/3;
-  grid-column: 2/4;
-  background: url("../content/Earthmap.jpg");
-  background-size: cover;
-  border-radius: 15px;
-  height: var(--height);
-}
-.img {
-  margin: 0px;
-  padding: 0px;
-}
-.zoomed {
-    display: none;
-    grid-row: 1 / -1;
-    grid-column: 1 /-1;
-    background-size: cover;
-    margin: 0px;
-    padding: 0px;
-    border-radius: 15px;
-    height: var(--height);
-}
 
 .World-clock {
     grid-column: 4 /-1;
     grid-row: 2/3;
 }
 
-h2 {
-  font-size: 25px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 1px 1px rgba(255,255,255,0.2);
-  font-family:'helvetica neue';
-}
 select {
   bottom: 7px;
   right: 22%;
@@ -138,12 +129,12 @@ span {
   font-size: 30px;
   font-weight: 600;
   color: rgba(255,255,255,0.85);
-  text-shadow: 1px 1px rgba(255,255,255,0.2);
+  text-shadow: 1px 1px rgba(255,255,255,0.0);
 }
 input {
-  position: relative;
+  position: sticky;
   left: -27px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.0);
   text-transform: capitalize;
   color: rgba(255,255,255,0.85);
   text-shadow: 1px 1px rgba(255,255,255,0.1);
@@ -155,37 +146,8 @@ input {
   border-radius: 5px;
   font-family:'helvetica neue';
 }
-ul #citySecond {
-  /* bottom: 7px;
-  right: 22%;
-  padding: 0px;
-  margin: 0px;
-  position: relative;
-  font-size: 30px;
-  text-shadow: 1px 1px rgba(255,255,255,0.4);
-  background: rgba(255, 255, 255, 0.0);
-  border: none;
-  color: rgba(255,255,255,0.9);
-  font-weight: 600;
-  font-family:'helvetica neue';
-  text-align: center; */
-}
-
-ul #citySecond li {
-  /* bottom: 7px;
-  right: 22%;
-  padding: 0px;
-  margin: 0px;
-  position: relative;
-  font-size: 30px;
-  background-color: black;
-  border: none;
-  color: black;
-  text-align: center; */
-}
 .input-value {
-  position: relative;
-  top: 60%;
+  position: absolute;
   text-transform: capitalize;
 
 }
@@ -213,7 +175,7 @@ ul #citySecond li {
   margin:auto;
   position: relative;
   padding:2rem;
-  background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.4);
   box-shadow:
   0 0 0 4px rgba(0,0,0,0.1),
   inset 0 0 0 3px #EFEFEF,
@@ -351,159 +313,33 @@ ul #citySecond li {
   font-size: 20px;
   font-weight: 600;
 }
-.cornerTempF1000 {
-     padding-left: 5px;
-}
-.movingDiv {
-  width: auto;
-  height: auto;
-  display: none;
-  position: absolute;
-  top: var(--pageY);
-  left: var(--pageX);
-  background: rgba(0,0,0,0.2);
-  padding: 1px;
-  margin: 10px;
-}
-.movingDivmax1000 {
-  width: auto;
-  height: auto;
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background: rgba(0,0,0,0.2);
-  padding: 1px;
-}
-.LonLat{
-  font-size: 12px;
-  text-align: left;
-  padding-top: 4px;
-  margin-left: 0px;
-}
 
-.list {
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 370px;
-  justify-content: center;
-  align-items: center;
+
+.selectedSelect option {
+  max-width: 100px;
 }
-
-ul li span {
-  color: rgba(255,255,255,0.9);
-  font-size: 1.7em;
-  font-weight: 400;
-  line-height: 30px;
-}
-ul li {
-    border-bottom: 2px solid rgba(0,0,0,0.2);
-    text-align: left;
-    list-style: none;
-}
-ul li input {
-  background: rgba(255, 255, 255, 0.2);
-  text-transform: inherit;
-  color: rgba(255,255,255,0.85);
-  border-bottom: 2px solid rgba(0,0,0,0.2);
-  height: auto;
-  width: 10px;
-  font-size: 1em;
-  text-align: left;
-  font-weight:200;
-  padding-right: 0px;
-}
-
-select #citySecond {
-  max-width: inherit;
-  display: flex;
-}
-
-select #citySecond option {
-  max-width: inherit;
-  text-align: center;
-}
-
-.delete {
-  text-align: right;
-  color: rgba(0,0,0,0.3);
-}
-
-/*Saved List----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-.wrapper {
-  display: grid;
-  grid-column: 1/2;
-  grid-row: 2/3;
-  padding: 30px 10px 10px 10px;
-  background: rgba(255,255,255,0.2);
-  border:5px solid rgba(255,255,255,0.9);
-  border-radius: 15px;
-  justify-content: center;
-  align-items: center;
-  margin-left: 50px;
-}
-
-h2 {
-  grid-column: 2/3;
-  text-align: center;
-  margin: 0;
-  font-weight: 200;
-}
-
-@media only screen and (max-width: 1500px) {
-
-  .body-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 50px;
-  }
-  .wrapper {
-    display: none;
-  }
-  .list {
-    display: none;
-  }
-  .world-map {
-    grid-row: 1/2;
-    grid-column: 1/3;
-    background: url("../content/Earthmap.jpg");
-    background-size: cover;
-    border-radius: 15px;
-    height: var(--height);
-    margin 5%;
-  }
-  .World-clock {
-      grid-column: 3/-1;
-      grid-row: 1/2;
-  }
-
+.selectedSelect {
+  max-width: 200px;
+  position: relative;
+  margin-left: -5%;
 }
 
 @media only screen and (max-width: 1000px) {
+
   .body-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr 1fr 1fr ;
+    grid-gap: 100px;
   }
-  .wrapper {
-    display: none;
+
+  .london-clock  {
+    grid-row: 1/2;
   }
-  .list {
-    display: none;
+  .tokyo-clock  {
+    grid-row: 2/3;
   }
-  .world-map {
-    grid-row: 1/-1;
-    grid-column: 1/-1;
+  .sydney-clock  {
+    grid-row: 3/4;
   }
-  .World-clock {
-    display: none;
-  }
-  .clock {
-    display: none;
-  }
- span {
-   font-size: 2em;
- }
+
 }

@@ -35,8 +35,43 @@ function getConfirmation(e) {
   console.log(newArray);
 }
 }
+
 typeInput.addEventListener('change', getConfirmation);
 typeInput.addEventListener('keyup', getConfirmation);
+
+
+
+function getLaLonInput(e) {
+    let inputValue = this.value;
+    fetch(` https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyAhbhZNE6A-Zcg49SMCyO7r_lH4MCDylRc `)
+    .then(response => response.json())
+    .then((inputCity) => {
+      latInputValue = inputCity.results[0].geometry.location.lat;
+      lonInputValue = inputCity.results[0].geometry.location.lng;
+    })
+    .then(() => {
+    fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${latInputValue},${lonInputValue}&timestamp=1331161200&key=AIzaSyANpHwd0ZvP_2qrvqEEp-5l6NS3LkwxSbY `)
+       .then(response => response.json())
+       .then(function(inputCity) {
+         offsetinputCity = inputCity.rawOffset
+       })
+       .then(function(){
+         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latInputValue}&lon=${lonInputValue}&units=metric&APPID=261e313010ab3d43b1344ab9eba64cfa`)
+         .then(response => response.json())
+         .then((data) => {
+           wheatherTokyo = data.main.temp ;
+           document.querySelector(".tempTokyo").innerHTML = `${Math.round(wheatherTokyo)}`;
+           let wheatherTokyoF = (wheatherTokyo * 1.8)+32;
+           document.querySelector(".tempFTokyo").innerHTML = `${Math.round(wheatherTokyoF)}`;
+           wheatherIconTokyo = data.weather[0].icon;
+           document.querySelector(".icon-Tokyo").innerHTML = `<img class="icon-Img-Tokyo" src="./content/${wheatherIconTokyo}.png" width="70px" height="70px">`;
+         });
+  })
+})
+}
+
+typeInput.addEventListener('change', getLaLonInput);
+
 
 function getLaLonSelected() {
   if (newArray !== []) {
